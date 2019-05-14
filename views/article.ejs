@@ -1,0 +1,13 @@
+<% include head %>
+<ul>
+    <% if(articles instanceof Array) {articles.forEach(article=>{ %>
+        <li>
+            <a href="/articles/<%= article.id %>" >
+                <%= article.title %>
+            </a>
+        </li>
+    <% })} else{%>
+        <div><%= articles.content %></div>
+    <% }%>
+</ul>
+<% include foot %>

@@ -30,7 +30,17 @@ app.get('/articles', (req, res, next) => {
   // res.send(articles);
   Article.all((err, articles) => {
     if (err) return next(err);
-    res.send(articles);
+    // 根据请求发送相应格式的相应
+    res.format({
+      html: () => {
+        // 为什么一定要找views 文件夹中的文件呢
+        res.render('article.ejs', { articles: articles });
+      },
+      json: () => {
+        res.send(articles);
+      }
+    });
+    // res.send(articles);
   });
 });
 
@@ -43,14 +53,24 @@ app.get('/articles', (req, res, next) => {
 app.get('/articles/:id', (req, res, next) => {
   const id = req.params.id;
   console.log('fetching:', id);
-  res.send(articles[id]);
+  // 只能有一个send()
+  // res.send(articles[id]);
   Article.find(id, (err, article) => {
     if (err) return next(err);
-    res.send(article);
+    // res.send(article);
+    res.format({
+      html: () => {
+        // 为什么一定要找views 文件夹中的文件呢
+        res.render('article.ejs', { articles: article });
+      },
+      json: () => {
+        res.send(article);
+      }
+    });
   });
 });
 
-app.delete('./articles/:id', (req, res, next) => {
+app.delete('/articles/:id', (req, res, next) => {
   const id = req.params.id;
   console.log('delete', id);
   // delete articles[id];
