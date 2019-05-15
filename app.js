@@ -24,6 +24,11 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 // 支持表单请求消息体 x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// 将boostrap.css发送至 浏览器端 到子页面样式就没了 呢
+app.use(
+  '/css/bootstrap.css',
+  express.static('node_modules/bootstrap/dist/css/bootstrap.css')
+);
 
 app.get('/articles', (req, res, next) => {
   // res.send('Hello world');

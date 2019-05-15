@@ -1,5 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const dbname = 'jsongsqlite';
+const dbname = 'jsong.sqlite';
 const db = new sqlite3.Database(dbname);
 
 db.serialize(() => {
